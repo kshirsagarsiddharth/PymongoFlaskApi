@@ -6,18 +6,21 @@ api = Api(app)
 
 
 def check_posted_data(posted_data, function_name):
-    if (
-        function_name == "add"
-        or function_name == "subtract"
-        or function_name == "multiply"
-        or function_name == "divide"
-    ):
-        if "x" not in posted_data or "y" not in posted_data:
-            return 301
-        elif int(posted_data["y"]) == 0:
-            return 302
-        else:
-            return 200
+    try: 
+        if (
+            function_name == "add"
+            or function_name == "subtract"
+            or function_name == "multiply"
+            or function_name == "divide"
+        ):
+            if "x" not in posted_data or "y" not in posted_data:
+                return 301
+            elif int(posted_data["y"]) == 0:
+                return 302
+            else:
+                return 200
+    except ValueError as e: 
+        return 304 
 
 
 class Add(Resource):
